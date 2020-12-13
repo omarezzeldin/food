@@ -4,7 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 import ResultsDetail from './ResultsDetail';
 
 const ResultsList = ({ title, results }) => {
-
+    if( !results.length ){
+        return null;
+    }
     const navigation = useNavigation();
 
     return <View style={styles.contianer}>
@@ -16,7 +18,9 @@ const ResultsList = ({ title, results }) => {
             keyExtractor={(result) => result.id}
             renderItem={({ item }) => {
                 return (
-                    <TouchableOpacity onPress={() => navigation.navigate('ResultsShowScreen')}>
+                    <TouchableOpacity 
+                        onPress={() => 
+                            navigation.navigate('ResultsShowScreen', { id: item.id })}>
                         <ResultsDetail result={item} />
                     </TouchableOpacity>
                 )
